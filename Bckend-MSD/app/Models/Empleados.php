@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable; // Si los empleados inician sesión
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 
 class Empleados extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'empleados';
 
@@ -33,7 +35,6 @@ class Empleados extends Authenticatable
         'remember_token',
     ];
 
-    // Relaciones potenciales (ajústalas según tus modelos)
     public function detalleCompra()
     {
         return $this->belongsTo(DetalleCompra::class, 'id_detalle_compras');
