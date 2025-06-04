@@ -10,7 +10,7 @@ class Compras extends Model
     use HasFactory;
     protected $fillable = [
         'id_empleado',
-        'id_cliente',
+        'id_detalle_compras',
         'fecha_compra',
         'estado',
         'metodo_pago_id',

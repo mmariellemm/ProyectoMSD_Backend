@@ -15,7 +15,6 @@ class Empleados extends Authenticatable
     protected $table = 'empleados';
 
     protected $fillable = [
-        'id_detalle_compras',
         'id_perfil',
         'id_permiso',
         'name',
