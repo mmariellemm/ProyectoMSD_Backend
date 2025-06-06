@@ -66,7 +66,7 @@ Route::prefix('api/v1')->group(function () {
 
 
 
-//Rutas de Productos
+//Rutas de los productos Productos
 Route::apiResource('productos', ProductosController::class);
 Route::get('productos/search', [ProductosController::class, 'search']);
 Route::resource('productos', ProductosController::class);
