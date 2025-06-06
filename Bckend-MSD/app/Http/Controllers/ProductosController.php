@@ -1,9 +1,3 @@
-
-
-Copiar
-
-Publicar
-
 <?php
 
 
@@ -217,6 +211,8 @@ class ProductosController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
+                'message' => 'Error en la búsqueda',
+                'error' => $e->getMessage()
                 'message' => 'Error en la búsqueda',
                 'error' => $e->getMessage()
             ], 500);
