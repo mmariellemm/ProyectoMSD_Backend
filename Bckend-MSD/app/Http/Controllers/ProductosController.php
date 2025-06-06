@@ -1,9 +1,3 @@
-
-
-Copiar
-
-Publicar
-
 <?php
 
 
