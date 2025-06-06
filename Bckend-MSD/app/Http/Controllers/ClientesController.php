@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+// use´s para llamar los modelos y clases necesarias
 use App\Models\Clientes;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -190,7 +191,7 @@ class ClientesController extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Cliente eliminado correctamente'
+                'message' => 'Se ha eliminado el cliente correctamente'
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

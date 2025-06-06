@@ -72,3 +72,4 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('productos', ProductosController::class);
     Route::get('productos/search', [ProductosController::class, 'search']);
 });
+
