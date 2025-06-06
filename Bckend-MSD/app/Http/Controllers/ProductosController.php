@@ -1,12 +1,9 @@
-<<<<<<< HEAD
-=======
 
 
 Copiar
 
 Publicar
 
->>>>>>> 297741fdc55fcc80f8b6b8975f492b552da95050
 <?php
 
 
