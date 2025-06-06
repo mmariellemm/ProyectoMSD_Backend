@@ -213,8 +213,6 @@ class ProductosController extends Controller
                 'success' => false,
                 'message' => 'Error en la búsqueda',
                 'error' => $e->getMessage()
-                'message' => 'Error en la búsqueda',
-                'error' => $e->getMessage()
             ], 500);
         }
     }
