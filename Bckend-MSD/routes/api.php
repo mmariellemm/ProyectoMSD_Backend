@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +17,6 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> 297741fdc55fcc80f8b6b8975f492b552da95050
 
 
 //Rutas Auth
@@ -77,9 +71,5 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('productos', ProductosController::class);
     Route::get('productos/search', [ProductosController::class, 'search']);
 });
-<<<<<<< HEAD
 
 
->>>>>>> Stashed changes
-=======
->>>>>>> 297741fdc55fcc80f8b6b8975f492b552da95050
