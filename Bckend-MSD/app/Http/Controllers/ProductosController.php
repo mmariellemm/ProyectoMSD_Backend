@@ -216,8 +216,4 @@ class ProductosController extends Controller
             ], 500);
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 297741fdc55fcc80f8b6b8975f492b552da95050
