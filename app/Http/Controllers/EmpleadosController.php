@@ -22,7 +22,7 @@ class EmpleadosController extends Controller
     }
 
     /**
-     * Registrar un nuevo empleado con ventas generadas desde Compras.
+     * Registrar un nuevo empleado con perfil, permiso fijo (id = 2) y ventas desde Compras.
      */
     public function store(Request $request)
     {
@@ -42,28 +42,40 @@ class EmpleadosController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        $empleado->ventas = $this->generarVentasDesdeCompras($empleado->id);
-        $empleado->save();
+        // Crear perfil asociado al empleado
+        Perfil::create([
+            'empleado_id' => $empleado->id,
+            // otros campos del perfil si es necesario, como 'telefono' => $request->telefono
+        ]);
 
-        return response()->json($empleado, 201);
+        // Asignar permiso con id = 2 (relación many-to-many)
+        $empleado->permisos()->attach(2);
+
+        // Generar ventas desde la tabla Compras (solo para mostrar)
+        $ventas = $this->generarVentasDesdeCompras($empleado->id);
+
+        return response()->json([
+            'empleado' => $empleado,
+            'ventas' => $ventas
+        ], 201);
     }
 
     /**
      * Mostrar un empleado específico.
      */
-    public function show(Empleados $empleados)
+    public function show(Empleados $empleado)
     {
-        return response()->json($empleados);
+        return response()->json($empleado);
     }
 
     /**
-     * Actualizar los datos de un empleado y su lista de ventas.
+     * Actualizar los datos de un empleado y mostrar sus ventas.
      */
-    public function update(Request $request, Empleados $empleados)
+    public function update(Request $request, Empleados $empleado)
     {
         $validator = Validator::make($request->all(), [
             'name'     => 'sometimes|required|string|max:100',
-            'email'    => 'sometimes|required|email|max:80|unique:empleados,email,' . $empleados->id,
+            'email'    => 'sometimes|required|email|max:80|unique:empleados,email,' . $empleado->id,
             'password' => 'nullable|string|min:6',
         ]);
 
@@ -71,32 +83,33 @@ class EmpleadosController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $empleados->update([
-            'name'     => $request->name ?? $empleados->name,
-            'email'    => $request->email ?? $empleados->email,
+        $empleado->update([
+            'name'     => $request->name ?? $empleado->name,
+            'email'    => $request->email ?? $empleado->email,
             'password' => $request->filled('password')
                 ? Hash::make($request->password)
-                : $empleados->password,
+                : $empleado->password,
         ]);
 
-        $empleados->ventas = $this->generarVentasDesdeCompras($empleados->id);
-        $empleados->save();
+        $ventas = $this->generarVentasDesdeCompras($empleado->id);
 
-        return response()->json($empleados);
+        return response()->json([
+            'empleado' => $empleado,
+            'ventas' => $ventas
+        ]);
     }
 
     /**
      * Eliminar un empleado.
      */
-    public function destroy(Empleados $empleados)
+    public function destroy(Empleados $empleado)
     {
-        $empleados->delete();
+        if ($empleado->perfil) {
+            $empleado->perfil()->delete();
+        }
+        $empleado->delete();
         return response()->json(['message' => 'Empleado eliminado correctamente']);
     }
-
-    // =====================================================
-    // FUNCIONES PRIVADAS PARA REUTILIZACIÓN DE LÓGICA
-    // =====================================================
 
     /**
      * Generar el array de ventas desde la tabla Compras.
@@ -113,6 +126,6 @@ class EmpleadosController extends Controller
                     'metodo_pago_id'     => $compra->metodo_pago_id,
                 ];
             })
-            ->toArray(); // convierte la colección en array puro
+            ->toArray();
     }
 }
