@@ -41,7 +41,7 @@ class Empleados extends Authenticatable
 
     public function perfil()
     {
-        return $this->belongsTo(Perfil::class, 'id_perfil');
+        return $this->belongsTo(Perfiles::class, 'id_perfil');
     }
 
     public function permiso()

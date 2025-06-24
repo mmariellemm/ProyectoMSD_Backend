@@ -14,4 +14,9 @@ class Perfiles extends Model
         'fecha_creacion',
     ];
 
+    public function empleado()
+    {
+        return $this->belongsTo(Empleados::class, 'empleado_id');
+    }
+
 }
