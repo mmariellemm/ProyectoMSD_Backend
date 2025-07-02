@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_empleado')->nullable();
-            $table->unsignedBigInteger('id_cliente')->nullable();
-            $table->unsignedBigInteger('id_producto')->nullable();
+            $table->unsignedBigInteger('id_detalle_compras')->nullable();
             $table->timestamp('fecha_compra')->useCurrent();
             $table->unsignedTinyInteger('estado')->default(1);
             $table->unsignedBigInteger('metodo_pago_id')->nullable();

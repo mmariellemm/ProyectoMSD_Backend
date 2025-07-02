@@ -3,17 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\User as Authenticatable; // Si los empleados inician sesión
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens;
 
 class Empleados extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $table = 'empleados';
 
     protected $fillable = [
-        'id_detalle_compras',
         'id_perfil',
         'id_permiso',
         'name',
@@ -33,7 +34,6 @@ class Empleados extends Authenticatable
         'remember_token',
     ];
 
-    // Relaciones potenciales (ajústalas según tus modelos)
     public function detalleCompra()
     {
         return $this->belongsTo(DetalleCompra::class, 'id_detalle_compras');
@@ -41,7 +41,7 @@ class Empleados extends Authenticatable
 
     public function perfil()
     {
-        return $this->belongsTo(Perfil::class, 'id_perfil');
+        return $this->belongsTo(Perfiles::class, 'id_perfil');
     }
 
     public function permiso()
