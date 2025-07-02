@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+
+
+
+use App\Http\Controllers\RolePermissionController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/roles', [RolePermissionController::class, 'index'])->name('roles.index');
+    Route::get('/roles/{id}/edit', [RolePermissionController::class, 'edit'])->name('roles.edit');
+    Route::put('/roles/{id}', [RolePermissionController::class, 'update'])->name('roles.update');
+});

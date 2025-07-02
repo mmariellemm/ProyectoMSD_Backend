@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +27,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Ruta para cerrar sesión
-Route::middleware('auth:sanctum')-> post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+
+
 
 //Rutas de Clientes
 Route::prefix('api/v1')->group(function () {
@@ -62,13 +64,15 @@ Route::prefix('api/v1')->group(function () {
         ->name('clientes.destroy');
 });
 
-//Rutas de Productos
 
+
+//Rutas de los productos Productos
 Route::apiResource('productos', ProductosController::class);
 Route::get('productos/search', [ProductosController::class, 'search']);
 Route::resource('productos', ProductosController::class);
 Route::get('productos/search', [ProductosController::class, 'search']);
 Route::middleware('auth')->group(function () {
-    Route::apiResource('productos', ProductosController::class);
-    Route::get('productos/search', [ProductosController::class, 'search']);
+Route::apiResource('productos', ProductosController::class);
+Route::get('productos/search', [ProductosController::class, 'search']);
+
 });
