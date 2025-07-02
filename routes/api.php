@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\PermisoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('productos/search', [ProductosController::class, 'search']);
 });
 
-
+Route::get('/per-index', [PermisoController::class, 'index'])->name('permiso.index');
+Route::get('/per-show', [PermisoController::class, 'show'])->name('permiso.show');
+Route::post('/per-store', [PermisoController::class, 'store'])->name('permiso.store');
+Route::put('/per-update/{id}', [PermisoController::class, 'update'])->name('permiso.update');
+Route::delete('/per-destroy/{id}', [PermisoController::class, 'destroy'])->name('permiso.destroy');
