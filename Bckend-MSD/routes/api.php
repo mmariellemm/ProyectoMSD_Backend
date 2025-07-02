@@ -76,3 +76,18 @@ Route::apiResource('productos', ProductosController::class);
 Route::get('productos/search', [ProductosController::class, 'search']);
 
 });
+
+
+// Rutas CRUD básicas para Compras
+>> Route::apiResource('compras', ComprasController::class);
+>>
+>> // Rutas adicionales para consultas específicas
+>> Route::get('compras/empleado/{empleadoId}', [ComprasController::class, 'porEmpleado'])
+>>     ->name('compras.por-empleado');
+>>
+>> Route::get('compras/cliente/{clienteId}', [ComprasController::class, 'porCliente'])
+>>     ->name('compras.por-cliente');
+>>
+>> Route::get('compras/estado/{estado}', [ComprasController::class, 'porEstado'])
+>>     ->name('compras.por-estado');
+
