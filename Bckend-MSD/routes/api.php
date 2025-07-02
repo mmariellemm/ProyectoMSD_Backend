@@ -90,5 +90,4 @@ Route::get('productos/search', [ProductosController::class, 'search']);
 >>
 >> Route::get('compras/estado/{estado}', [ComprasController::class, 'porEstado'])
 >>     ->name('compras.por-estado'); 
-okf
 
