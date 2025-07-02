@@ -52,3 +52,17 @@ Route::get('/per-show', [PermisoController::class, 'show'])->name('permiso.show'
 Route::post('/per-store', [PermisoController::class, 'store'])->name('permiso.store');
 Route::put('/per-update/{id}', [PermisoController::class, 'update'])->name('permiso.update');
 Route::delete('/per-destroy/{id}', [PermisoController::class, 'destroy'])->name('permiso.destroy');
+
+// Rutas CRUD básicas para Compras
+>> Route::apiResource('compras', ComprasController::class);
+>>
+>> // Rutas adicionales para consultas específicas
+>> Route::get('compras/empleado/{empleadoId}', [ComprasController::class, 'porEmpleado'])
+>>     ->name('compras.por-empleado');
+>>
+>> Route::get('compras/cliente/{clienteId}', [ComprasController::class, 'porCliente'])
+>>     ->name('compras.por-cliente');
+>>
+>> Route::get('compras/estado/{estado}', [ComprasController::class, 'porEstado'])
+>>     ->name('compras.por-estado'); 
+
