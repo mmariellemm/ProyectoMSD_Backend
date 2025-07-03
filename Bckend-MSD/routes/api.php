@@ -91,3 +91,22 @@ Route::get('productos/search', [ProductosController::class, 'search']);
 >> Route::get('compras/estado/{estado}', [ComprasController::class, 'porEstado'])
 >>     ->name('compras.por-estado'); 
 
+
+// Rutas CRUD básicas para DetalleCompras
+Route::apiResource('detalle-compras', DetalleComprasController::class);
+
+// Rutas adicionales para consultas específicas
+Route::get('detalle-compras/compra/{compraId}', [DetalleComprasController::class, 'porCompra'])
+    ->name('detalle-compras.por-compra');
+
+Route::get('detalle-compras/cliente/{clienteId}', [DetalleComprasController::class, 'porCliente'])
+    ->name('detalle-compras.por-cliente');
+
+Route::get('detalle-compras/total/{compraId}', [DetalleComprasController::class, 'totalCompra'])
+    ->name('detalle-compras.total-compra');
+
+Route::get('detalle-compras/estadisticas/{clienteId}', [DetalleComprasController::class, 'estadisticasCliente'])
+    ->name('detalle-compras.estadisticas-cliente');
+
+Route::post('detalle-compras/crear-multiples', [DetalleComprasController::class, 'crearMultiples'])
+    ->name('detalle-compras.crear-multiples');
