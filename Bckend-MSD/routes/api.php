@@ -77,7 +77,6 @@ Route::get('productos/search', [ProductosController::class, 'search']);
 
 });
 
-
 // Rutas CRUD básicas para Compras
 >> Route::apiResource('compras', ComprasController::class);
 >>
