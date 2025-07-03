@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +27,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 // Ruta para cerrar sesión
-Route::middleware('auth:sanctum')-> post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+
+
 
 //Rutas de Clientes
 Route::prefix('api/v1')->group(function () {
@@ -62,14 +64,48 @@ Route::prefix('api/v1')->group(function () {
         ->name('clientes.destroy');
 });
 
-//Rutas de Productos
 
+
+//Rutas de los productos Productos
 Route::apiResource('productos', ProductosController::class);
 Route::get('productos/search', [ProductosController::class, 'search']);
 Route::resource('productos', ProductosController::class);
 Route::get('productos/search', [ProductosController::class, 'search']);
 Route::middleware('auth')->group(function () {
-    Route::apiResource('productos', ProductosController::class);
-    Route::get('productos/search', [ProductosController::class, 'search']);
+Route::apiResource('productos', ProductosController::class);
+Route::get('productos/search', [ProductosController::class, 'search']);
+
 });
 
+// Rutas CRUD básicas para Compras
+>> Route::apiResource('compras', ComprasController::class);
+>>
+>> // Rutas adicionales para consultas específicas
+>> Route::get('compras/empleado/{empleadoId}', [ComprasController::class, 'porEmpleado'])
+>>     ->name('compras.por-empleado');
+>>
+>> Route::get('compras/cliente/{clienteId}', [ComprasController::class, 'porCliente'])
+>>     ->name('compras.por-cliente');
+>>
+>> Route::get('compras/estado/{estado}', [ComprasController::class, 'porEstado'])
+>>     ->name('compras.por-estado'); 
+
+
+// Rutas CRUD básicas para DetalleCompras
+Route::apiResource('detalle-compras', DetalleComprasController::class);
+
+// Rutas adicionales para consultas específicas
+Route::get('detalle-compras/compra/{compraId}', [DetalleComprasController::class, 'porCompra'])
+    ->name('detalle-compras.por-compra');
+
+Route::get('detalle-compras/cliente/{clienteId}', [DetalleComprasController::class, 'porCliente'])
+    ->name('detalle-compras.por-cliente');
+
+Route::get('detalle-compras/total/{compraId}', [DetalleComprasController::class, 'totalCompra'])
+    ->name('detalle-compras.total-compra');
+
+Route::get('detalle-compras/estadisticas/{clienteId}', [DetalleComprasController::class, 'estadisticasCliente'])
+    ->name('detalle-compras.estadisticas-cliente');
+
+Route::post('detalle-compras/crear-multiples', [DetalleComprasController::class, 'crearMultiples'])
+    ->name('detalle-compras.crear-multiples');
