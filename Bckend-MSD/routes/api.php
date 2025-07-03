@@ -110,3 +110,19 @@ Route::get('detalle-compras/estadisticas/{clienteId}', [DetalleComprasController
 Route::post('detalle-compras/crear-multiples', [DetalleComprasController::class, 'crearMultiples'])
     ->name('detalle-compras.crear-multiples'); 
     
+
+// routes/api.php
+Route::post('login', [RolesController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [RolesController::class, 'logout']);
+    Route::get('me', [RolesController::class, 'me']);
+    Route::get('dashboard', [RolesController::class, 'dashboard']);
+    Route::get('check-role/{role}', [RolesController::class, 'checkRole']);
+    
+    // Solo administradores
+    Route::post('assign-role', [RolesController::class, 'assignRole']);
+    Route::post('remove-role', [RolesController::class, 'removeRole']);
+    Route::get('users', [RolesController::class, 'listUsers']);
+    Route::post('create-user', [RolesController::class, 'createUser']);
+});    
