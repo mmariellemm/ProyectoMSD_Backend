@@ -108,4 +108,5 @@ Route::get('detalle-compras/estadisticas/{clienteId}', [DetalleComprasController
     ->name('detalle-compras.estadisticas-cliente');
 
 Route::post('detalle-compras/crear-multiples', [DetalleComprasController::class, 'crearMultiples'])
-    ->name('detalle-compras.crear-multiples');
+    ->name('detalle-compras.crear-multiples'); 
+    
