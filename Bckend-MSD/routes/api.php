@@ -125,4 +125,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('remove-role', [RolesController::class, 'removeRole']);
     Route::get('users', [RolesController::class, 'listUsers']);
     Route::post('create-user', [RolesController::class, 'createUser']);
-});    
+});     
