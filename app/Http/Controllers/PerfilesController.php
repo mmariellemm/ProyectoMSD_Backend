@@ -47,7 +47,7 @@ class PerfilesController extends Controller
      */
     public function update(Request $request, Perfiles $perfil)
     {
-        /* $request->validate([
+        $request->validate([
             'producto' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
         ]);
@@ -55,7 +55,7 @@ class PerfilesController extends Controller
         $perfil->update($request->all());
 
         return redirect()->route('perfil.index')
-            ->with('success', 'Perfil actualizado correctamente.'); */
+            ->with('success', 'Perfil actualizado correctamente.');
     }
 
     /**
