@@ -1,0 +1,30 @@
+name: Verificar Laravel (sin Docker)
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Configurar PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          extensions: mbstring, bcmath, intl
+          coverage: none
+
+      - name: 📥 Instalar dependencias con Composer
+        run: composer install --no-progress --no-suggest --prefer-dist
+
+      - name: 🗝️ Generar clave de Laravel
+        run: php artisan key:generate
+        env:
+          APP_KEY: base64:dummykey1234567890
+          APP_ENV: local
+
+      - name: 🚀 Verificar que Laravel funciona
+        run: php artisan --version
