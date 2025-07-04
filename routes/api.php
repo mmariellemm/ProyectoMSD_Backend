@@ -7,6 +7,7 @@ use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\PermisoController;
+use App\Http\Controllers\EmpresaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,9 @@ use App\Http\Controllers\PermisoController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/empresa/register', [EmpresaController::class, 'register']);
+Route::post('/empresa/login', [EmpresaController::class, 'login']);
 
 // Auth
 Route::post('/register', [AuthController::class, 'register']);
